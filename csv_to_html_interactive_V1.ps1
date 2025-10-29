@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Converts a CSV file of Tom Fenton's past articles into an interactive, searchable, sortable HTML page with text highlighting.
 
