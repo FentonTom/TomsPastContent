@@ -1,0 +1,954 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles by Tom Fenton</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+        h1 {
+            text-align: center;
+        }
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #themeToggle {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--header-bg);
+            cursor: pointer;
+        }
+        tr:nth-child(even) {
+            background-color: var(--row-even);
+        }
+        tr:nth-child(odd) {
+            background-color: var(--row-odd);
+        }
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #ccc;
+            --header-bg: #f2f2f2;
+            --row-even: #ffffff;
+            --row-odd: #f6f6f6;
+            --link-color: #1a0dab;
+        }
+        body.dark {
+            --bg-color: #1e1e1e;
+            --text-color: #f0f0f0;
+            --border-color: #444;
+            --header-bg: #333;
+            --row-even: #2c2c2c;
+            --row-odd: #252525;
+            --link-color: #4ea3f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Articles by Tom Fenton</h1>
+
+    <div id="controls">
+        <label for="domainFilter">Filter by Domain:</label>
+        <select id="domainFilter" onchange="filterDomain()">
+            <option value="all">All</option>            <option value='virtualizationreview.com'>virtualizationreview.com</option>
+            <option value='www.storagereview.com'>www.storagereview.com</option>
+            <option value='www.stratodesk.com'>www.stratodesk.com</option>
+        </select>
+        <button id="themeToggle" onclick="toggleTheme()">Toggle Light/Dark</button>
+    </div>
+
+    <table id="articlesTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Domain</th>
+                <th onclick="sortTable(1)">Title</th>
+                <th onclick="sortTable(2)">Date</th>
+                <th onclick="sortTable(3)">URL</th>
+            </tr>
+        </thead>
+        <tbody>            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/02/12/testing-ms-office-apps.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/02/12/testing-ms-office-apps.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/02/12/testing-ms-office-apps.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/03/14/vpn-jumpbox.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/03/14/vpn-jumpbox.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/03/14/vpn-jumpbox.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/01/23/sub-100-pc.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/01/23/sub-100-pc.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/01/23/sub-100-pc.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/01/29/cheap-pc-on-free-os.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/01/29/cheap-pc-on-free-os.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/01/29/cheap-pc-on-free-os.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/igel-disrupt-2024-provides-a-view-to-future-direction' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/igel-disrupt-2024-provides-a-view-to-future-direction' target='_blank'>https://www.storagereview.com/news/igel-disrupt-2024-provides-a-view-to-future-direction</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/leaders-and-innovators-in-euc-lenovo-and-the-future-of-end-user-computing' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/leaders-and-innovators-in-euc-lenovo-and-the-future-of-end-user-computing' target='_blank'>https://www.storagereview.com/news/leaders-and-innovators-in-euc-lenovo-and-the-future-of-end-user-computing</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/03/18/hands-on-tailscale.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/03/18/hands-on-tailscale.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/03/18/hands-on-tailscale.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/03/28/quick-remote-vpn-access.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/03/28/quick-remote-vpn-access.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/03/28/quick-remote-vpn-access.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/03/nuc-replacement-3.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/03/nuc-replacement-3.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/10/03/nuc-replacement-3.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/05/nuc-replacement-4.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/05/nuc-replacement-4.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/10/05/nuc-replacement-4.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/09/07/workstation-info.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/09/07/workstation-info.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/09/07/workstation-info.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/dell-driving-innovation-to-the-edge' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/dell-driving-innovation-to-the-edge' target='_blank'>https://www.storagereview.com/news/dell-driving-innovation-to-the-edge</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/25/terramaster3.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/25/terramaster3.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/10/25/terramaster3.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/12/14/workstation-vm-minipc.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/12/14/workstation-vm-minipc.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/12/14/workstation-vm-minipc.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/13/vmware-explore-europe.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/13/vmware-explore-europe.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/10/13/vmware-explore-europe.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/20/terramaster-review.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/10/20/terramaster-review.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/10/20/terramaster-review.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/05/29/install-free-hypervisor.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/05/29/install-free-hypervisor.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/05/29/install-free-hypervisor.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/08/20/spotlight-on-nexthink-experience-24.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/08/20/spotlight-on-nexthink-experience-24.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/08/20/spotlight-on-nexthink-experience-24.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/podcast/podcast-132-igel-future-proof-solutions-for-end-user-computing-deployments' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/podcast/podcast-132-igel-future-proof-solutions-for-end-user-computing-deployments' target='_blank'>https://www.storagereview.com/podcast/podcast-132-igel-future-proof-solutions-for-end-user-computing-deployments</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/25/kubecon-2024.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/25/kubecon-2024.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/07/25/kubecon-2024.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/08/15/dex-in-the-workplace.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/08/15/dex-in-the-workplace.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/08/15/dex-in-the-workplace.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/09/27/hands-on-with-vmwares-new-vmcli-a-mysterious-command.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/09/27/hands-on-with-vmwares-new-vmcli-a-mysterious-command.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/09/27/hands-on-with-vmwares-new-vmcli-a-mysterious-command.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/review/how-aws-workspaces-meet-todays-corporate-desktop-challenges' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/review/how-aws-workspaces-meet-todays-corporate-desktop-challenges' target='_blank'>https://www.storagereview.com/review/how-aws-workspaces-meet-todays-corporate-desktop-challenges</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/09/09/vmware-explore-2024-announcements-and-final-recap.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/09/09/vmware-explore-2024-announcements-and-final-recap.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/09/09/vmware-explore-2024-announcements-and-final-recap.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/review/euc-leaders-and-innovators-dex-originator-nexthink' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/review/euc-leaders-and-innovators-dex-originator-nexthink' target='_blank'>https://www.storagereview.com/review/euc-leaders-and-innovators-dex-originator-nexthink</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/leaders-and-innovators-in-euc-aws-and-the-modern-desktop' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/leaders-and-innovators-in-euc-aws-and-the-modern-desktop' target='_blank'>https://www.storagereview.com/news/leaders-and-innovators-in-euc-aws-and-the-modern-desktop</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/06/10/ubuntu.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/06/10/ubuntu.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/06/10/ubuntu.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/06/03/using-free-vmware-hypervisor.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/06/03/using-free-vmware-hypervisor.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/06/03/using-free-vmware-hypervisor.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/leaders-and-innovators-in-euc-island-on-enterprise-browsers' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/leaders-and-innovators-in-euc-island-on-enterprise-browsers' target='_blank'>https://www.storagereview.com/news/leaders-and-innovators-in-euc-island-on-enterprise-browsers</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/16/ai-writing.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/16/ai-writing.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/07/16/ai-writing.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/18/omnissa.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/18/omnissa.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/07/18/omnissa.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/review/leaders-and-innovators-in-euc-apporto-a-virtual-desktop-innovator' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/review/leaders-and-innovators-in-euc-apporto-a-virtual-desktop-innovator' target='_blank'>https://www.storagereview.com/review/leaders-and-innovators-in-euc-apporto-a-virtual-desktop-innovator</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/12/vsphere-foundation-5-2.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/07/12/vsphere-foundation-5-2.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/07/12/vsphere-foundation-5-2.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/08/31/workstation-autostart.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/08/31/workstation-autostart.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/08/31/workstation-autostart.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/07/18/phoronix-test-suite.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/07/18/phoronix-test-suite.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/07/18/phoronix-test-suite.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/08/10/iscsi-for-esxi.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/08/10/iscsi-for-esxi.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/08/10/iscsi-for-esxi.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/07/01/wslg-deeper-dive.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/07/01/wslg-deeper-dive.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/07/01/wslg-deeper-dive.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/07/12/one-little-trick.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/07/12/one-little-trick.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/07/12/one-little-trick.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/09/23/new-vsphere-8.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/09/23/new-vsphere-8.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/09/23/new-vsphere-8.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/10/12/quadra-part-2.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/10/12/quadra-part-2.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/10/12/quadra-part-2.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/08/23/home-lab-nas.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/08/23/home-lab-nas.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/08/23/home-lab-nas.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/09/07/vmware-explore-inperson.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/09/07/vmware-explore-inperson.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/09/07/vmware-explore-inperson.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/02/24/webcam-review.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/02/24/webcam-review.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/02/24/webcam-review.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/02/25/pi-time-lapse-camera.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/02/25/pi-time-lapse-camera.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/02/25/pi-time-lapse-camera.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/podcast/49-tom-fenton-truenas-hp-zcentral-remote-intel-nucs' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/podcast/49-tom-fenton-truenas-hp-zcentral-remote-intel-nucs' target='_blank'>https://www.storagereview.com/podcast/49-tom-fenton-truenas-hp-zcentral-remote-intel-nucs</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/02/02/nic-wi-fi-info-linux.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/02/02/nic-wi-fi-info-linux.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/02/02/nic-wi-fi-info-linux.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/05/24/revisiting-wsl.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/05/24/revisiting-wsl.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/05/24/revisiting-wsl.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/06/09/android-on-windows.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/06/09/android-on-windows.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/06/09/android-on-windows.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/03/01/pi-edge-monitoring.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/03/01/pi-edge-monitoring.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/03/01/pi-edge-monitoring.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/05/12/linux-printer-cli.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/05/12/linux-printer-cli.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/05/12/linux-printer-cli.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/10/14/quadra-part-3.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/10/14/quadra-part-3.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/10/14/quadra-part-3.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/06/15/bios-info.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/06/15/bios-info.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/06/15/bios-info.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/07/03/winiot.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/07/03/winiot.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/07/03/winiot.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/04/28/frontline.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/04/28/frontline.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/04/28/frontline.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/05/10/ubuntu-lunar-lobster.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/05/10/ubuntu-lunar-lobster.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/05/10/ubuntu-lunar-lobster.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/08/01/performant-nuc.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/08/01/performant-nuc.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/08/01/performant-nuc.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/08/03/workstation-nuc.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/08/03/workstation-nuc.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/08/03/workstation-nuc.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/07/07/hands-on-windows-iot.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/07/07/hands-on-windows-iot.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/07/07/hands-on-windows-iot.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/review/seven-things-to-love-about-arc-enabled-sql-managed-instances' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/review/seven-things-to-love-about-arc-enabled-sql-managed-instances' target='_blank'>https://www.storagereview.com/review/seven-things-to-love-about-arc-enabled-sql-managed-instances</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/12/22/docker4.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/12/22/docker4.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/12/22/docker4.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/01/18/docker-apps-1.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/01/18/docker-apps-1.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/01/18/docker-apps-1.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/10/19/quadra-part-5.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/10/19/quadra-part-5.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/10/19/quadra-part-5.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/12/20/docker3.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2022/12/20/docker3.aspx' target='_blank'>https://virtualizationreview.com/articles/2022/12/20/docker3.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/03/24/vcsa-backup.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/03/24/vcsa-backup.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/03/24/vcsa-backup.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/03/30/thin-native-client-testing.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/03/30/thin-native-client-testing.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/03/30/thin-native-client-testing.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/02/08/cron-linux.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/02/08/cron-linux.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/02/08/cron-linux.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/02/13/quadra-inovato.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2023/02/13/quadra-inovato.aspx' target='_blank'>https://virtualizationreview.com/articles/2023/02/13/quadra-inovato.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/10/18/automate-vmware-vms-using-vmrun.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/10/18/automate-vmware-vms-using-vmrun.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/10/18/automate-vmware-vms-using-vmrun.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/26/broadcom-vmware-explore-2025-day-one.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/26/broadcom-vmware-explore-2025-day-one.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/08/26/broadcom-vmware-explore-2025-day-one.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/28/broadcom-vmware-explore-2025-day-two-keynote.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/28/broadcom-vmware-explore-2025-day-two-keynote.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/08/28/broadcom-vmware-explore-2025-day-two-keynote.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/13/running-android-and-linux-applications-on-an-intel-laptop.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/13/running-android-and-linux-applications-on-an-intel-laptop.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/08/13/running-android-and-linux-applications-on-an-intel-laptop.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/20/euc-world-amplify-2025-was-the-years-must-attend-euc-event.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/20/euc-world-amplify-2025-was-the-years-must-attend-euc-event.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/08/20/euc-world-amplify-2025-was-the-years-must-attend-euc-event.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/08/explaining-virtual-machines-and-containers-with-three-slides.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/08/explaining-virtual-machines-and-containers-with-three-slides.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/08/explaining-virtual-machines-and-containers-with-three-slides.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/16/why-you-need-to-visit-kubecons-project-pavilion.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/16/why-you-need-to-visit-kubecons-project-pavilion.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/16/why-you-need-to-visit-kubecons-project-pavilion.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/09/04/recap-of-euc-world-amplify-2025.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/09/04/recap-of-euc-world-amplify-2025.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/09/04/recap-of-euc-world-amplify-2025.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/06/five-start-ups-not-to-miss-at-kubecon-2025.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/06/five-start-ups-not-to-miss-at-kubecon-2025.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/06/five-start-ups-not-to-miss-at-kubecon-2025.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/storagereview-official-media-sponsor-of-euc-world-amplify-2025' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/storagereview-official-media-sponsor-of-euc-world-amplify-2025' target='_blank'>https://www.storagereview.com/news/storagereview-official-media-sponsor-of-euc-world-amplify-2025</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/07/23/repurpose-your-windows-10-system.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/07/23/repurpose-your-windows-10-system.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/07/23/repurpose-your-windows-10-system.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/review/breathing-new-life-into-old-devices-with-windows-11-on-amazon-workspaces' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/review/breathing-new-life-into-old-devices-with-windows-11-on-amazon-workspaces' target='_blank'>https://www.storagereview.com/review/breathing-new-life-into-old-devices-with-windows-11-on-amazon-workspaces</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/07/10/euc-world-amplify-2025-a-dive-into-the-years-must-attend-euc-event.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/07/10/euc-world-amplify-2025-a-dive-into-the-years-must-attend-euc-event.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/07/10/euc-world-amplify-2025-a-dive-into-the-years-must-attend-euc-event.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/day-two-at-euc-world-amplify-2025' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/day-two-at-euc-world-amplify-2025' target='_blank'>https://www.storagereview.com/news/day-two-at-euc-world-amplify-2025</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/day-three-at-euc-world-amplify-2025' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/day-three-at-euc-world-amplify-2025' target='_blank'>https://www.storagereview.com/news/day-three-at-euc-world-amplify-2025</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/day-one-at-euc-world-amplify' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/day-one-at-euc-world-amplify' target='_blank'>https://www.storagereview.com/news/day-one-at-euc-world-amplify</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/06/fydeos-a-better-x64-chromeos.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/08/06/fydeos-a-better-x64-chromeos.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/08/06/fydeos-a-better-x64-chromeos.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/list/news.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/list/news.aspx' target='_blank'>https://virtualizationreview.com/articles/list/news.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/08/explaining-virtual-machines-and-containers-with-three-slides.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/08/explaining-virtual-machines-and-containers-with-three-slides.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/08/explaining-virtual-machines-and-containers-with-three-slides.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/16/why-you-need-to-visit-kubecons-project-pavilion.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/16/why-you-need-to-visit-kubecons-project-pavilion.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/16/why-you-need-to-visit-kubecons-project-pavilion.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/home.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/home.aspx' target='_blank'>https://virtualizationreview.com/home.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/12/11/repurposing-an-obsolete-windows-10-laptop-into-a-thin-client-part-1.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/12/11/repurposing-an-obsolete-windows-10-laptop-into-a-thin-client-part-1.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/12/11/repurposing-an-obsolete-windows-10-laptop-into-a-thin-client-part-1.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/17/kubecon-2025-exploring-the-kubecon-ecosystem-part-1.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/17/kubecon-2025-exploring-the-kubecon-ecosystem-part-1.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/11/17/kubecon-2025-exploring-the-kubecon-ecosystem-part-1.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/12/15/repurposing-an-obsolete-windows-10-laptop-into-a-thin-client-part-2.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/12/15/repurposing-an-obsolete-windows-10-laptop-into-a-thin-client-part-2.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/12/15/repurposing-an-obsolete-windows-10-laptop-into-a-thin-client-part-2.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/24/the-enduring-consequences-of-the-vmware-acquisition.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/24/the-enduring-consequences-of-the-vmware-acquisition.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/24/the-enduring-consequences-of-the-vmware-acquisition.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/list/desktop-virtualization.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/list/desktop-virtualization.aspx' target='_blank'>https://virtualizationreview.com/articles/list/desktop-virtualization.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/18/kubecon-2025-exploring-the-kubecon-ecosystem-part-2.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/18/kubecon-2025-exploring-the-kubecon-ecosystem-part-2.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/11/18/kubecon-2025-exploring-the-kubecon-ecosystem-part-2.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/list/archives.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/list/archives.aspx' target='_blank'>https://virtualizationreview.com/articles/list/archives.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/13/kubecon-cloudnativecon-north-america-2025-day-1.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/13/kubecon-cloudnativecon-north-america-2025-day-1.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/11/13/kubecon-cloudnativecon-north-america-2025-day-1.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/14/kubecon--cloudnativecon-north-america-2025-day-2.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/14/kubecon--cloudnativecon-north-america-2025-day-2.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/11/14/kubecon--cloudnativecon-north-america-2025-day-2.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/12/04/kubecon-25-takeaways-top-trends-tools-technologies.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/12/04/kubecon-25-takeaways-top-trends-tools-technologies.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/12/04/kubecon-25-takeaways-top-trends-tools-technologies.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/06/five-start-ups-not-to-miss-at-kubecon-2025.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/06/five-start-ups-not-to-miss-at-kubecon-2025.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/06/five-start-ups-not-to-miss-at-kubecon-2025.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/27/vmware-workstation-25h2--a-new-name-and-era-for-vmware-workstation.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/10/27/vmware-workstation-25h2--a-new-name-and-era-for-vmware-workstation.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/10/27/vmware-workstation-25h2--a-new-name-and-era-for-vmware-workstation.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/12/kubecon-2025-day-0-recap.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/11/12/kubecon-2025-day-0-recap.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/11/12/kubecon-2025-day-0-recap.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/06/18/vmware-cloud-foundation-9-ships.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/06/18/vmware-cloud-foundation-9-ships.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/06/18/vmware-cloud-foundation-9-ships.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/04/configuring-esxi-8-on-a-raspberry-pi-5.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/04/configuring-esxi-8-on-a-raspberry-pi-5.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/02/04/configuring-esxi-8-on-a-raspberry-pi-5.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/2025-will-be-the-year-of-euc-experts-weigh-in-on-what-to-expect-this-year/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/2025-will-be-the-year-of-euc-experts-weigh-in-on-what-to-expect-this-year/' target='_blank'>https://www.stratodesk.com/2025-will-be-the-year-of-euc-experts-weigh-in-on-what-to-expect-this-year/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/23/vmware-esxi-8-on-a-raspberry-pi-5.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/23/vmware-esxi-8-on-a-raspberry-pi-5.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/01/23/vmware-esxi-8-on-a-raspberry-pi-5.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/enterprise-browsers-and-vdi-reduction/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/enterprise-browsers-and-vdi-reduction/' target='_blank'>https://www.stratodesk.com/enterprise-browsers-and-vdi-reduction/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/25/four-free-network-scanners.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/25/four-free-network-scanners.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/02/25/four-free-network-scanners.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/first-look-at-the-pi-500-a-thin-client-in-a-keyboard-for-under-100/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/first-look-at-the-pi-500-a-thin-client-in-a-keyboard-for-under-100/' target='_blank'>https://www.stratodesk.com/first-look-at-the-pi-500-a-thin-client-in-a-keyboard-for-under-100/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/10/creating-vms-on-a-raspberry-pi-5-running-esxi.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/10/creating-vms-on-a-raspberry-pi-5-running-esxi.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/02/10/creating-vms-on-a-raspberry-pi-5-running-esxi.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/18/installing-windows-software-from-the-command-line-using-winget.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/02/18/installing-windows-software-from-the-command-line-using-winget.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/02/18/installing-windows-software-from-the-command-line-using-winget.aspx</a></td>
+            </tr>
+            <tr data-domain='www.storagereview.com'>
+                <td><a href='https://www.storagereview.com' target='_blank'>www.storagereview.com</a></td>
+                <td><a href='https://www.storagereview.com/news/euc-leaders-and-innovators-acium-another-way-to-secure-web-browsers' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.storagereview.com/news/euc-leaders-and-innovators-acium-another-way-to-secure-web-browsers' target='_blank'>https://www.storagereview.com/news/euc-leaders-and-innovators-acium-another-way-to-secure-web-browsers</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/02/hands-on-with-open-source-flatcar-os-for-containers.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/02/hands-on-with-open-source-flatcar-os-for-containers.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/01/02/hands-on-with-open-source-flatcar-os-for-containers.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/10/25/grafana-open-source-data-visualization-solution-part-1.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/10/25/grafana-open-source-data-visualization-solution-part-1.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/10/25/grafana-open-source-data-visualization-solution-part-1.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/11/13/take-5-with-tom-fenton-5-things-you-can-do-with-vmwares-free-workstation-desktop-hypervisor.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2024/11/13/take-5-with-tom-fenton-5-things-you-can-do-with-vmwares-free-workstation-desktop-hypervisor.aspx' target='_blank'>https://virtualizationreview.com/articles/2024/11/13/take-5-with-tom-fenton-5-things-you-can-do-with-vmwares-free-workstation-desktop-hypervisor.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/what-are-your-options-as-windows-10-nears-eol/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/what-are-your-options-as-windows-10-nears-eol/' target='_blank'>https://www.stratodesk.com/what-are-your-options-as-windows-10-nears-eol/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/21/how-useful-is-new-raspberry-pi-500-computer-in-a-keyboard.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/21/how-useful-is-new-raspberry-pi-500-computer-in-a-keyboard.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/01/21/how-useful-is-new-raspberry-pi-500-computer-in-a-keyboard.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/07/installing-flatcar-container-linux-on-vmware-workstation.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/07/installing-flatcar-container-linux-on-vmware-workstation.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/01/07/installing-flatcar-container-linux-on-vmware-workstation.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/14/hand-on-with-raspberry-pi-500-a-computer-in-a-keyboard.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/01/14/hand-on-with-raspberry-pi-500-a-computer-in-a-keyboard.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/01/14/hand-on-with-raspberry-pi-500-a-computer-in-a-keyboard.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/03/04/using-ntopng-for-network-visualization-and-monitoring.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/03/04/using-ntopng-for-network-visualization-and-monitoring.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/03/04/using-ntopng-for-network-visualization-and-monitoring.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/13/zabbix-an-open-source-monitoring-solution.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/13/zabbix-an-open-source-monitoring-solution.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/05/13/zabbix-an-open-source-monitoring-solution.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/modern-remote-computing-101-a-primer/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/modern-remote-computing-101-a-primer/' target='_blank'>https://www.stratodesk.com/modern-remote-computing-101-a-primer/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/28/hands-on-with-macstadium-remote-desktop.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/28/hands-on-with-macstadium-remote-desktop.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/04/28/hands-on-with-macstadium-remote-desktop.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/08/you-need-a-windows-package-manager.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/08/you-need-a-windows-package-manager.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/05/08/you-need-a-windows-package-manager.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/06/02/vmware-explore-2025-why-you-need-to-go.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/06/02/vmware-explore-2025-why-you-need-to-go.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/06/02/vmware-explore-2025-why-you-need-to-go.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/06/10/finally-an-official-command-line-editor-for-windows.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/06/10/finally-an-official-command-line-editor-for-windows.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/06/10/finally-an-official-command-line-editor-for-windows.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/15/installing-zabbix-an-open-source-monitoring-solution.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/15/installing-zabbix-an-open-source-monitoring-solution.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/05/15/installing-zabbix-an-open-source-monitoring-solution.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/19/monitoring-windows-and-linux-systems-using-open-source-zabbix.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/05/19/monitoring-windows-and-linux-systems-using-open-source-zabbix.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/05/19/monitoring-windows-and-linux-systems-using-open-source-zabbix.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/03/10/using-ntopng-community-edition-to-analyze-lan-traffic.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/03/10/using-ntopng-community-edition-to-analyze-lan-traffic.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/03/10/using-ntopng-community-edition-to-analyze-lan-traffic.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/two-completely-different-thin-clients-a-beauty-and-a-beast/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/two-completely-different-thin-clients-a-beauty-and-a-beast/' target='_blank'>https://www.stratodesk.com/two-completely-different-thin-clients-a-beauty-and-a-beast/</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/using-a-pi-500-a-thin-client-priced-at-less-than-100-part-2/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/using-a-pi-500-a-thin-client-priced-at-less-than-100-part-2/' target='_blank'>https://www.stratodesk.com/using-a-pi-500-a-thin-client-priced-at-less-than-100-part-2/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/03/06/setting-up-ntopng-for-network-visualization-and-monitoring.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/03/06/setting-up-ntopng-for-network-visualization-and-monitoring.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/03/06/setting-up-ntopng-for-network-visualization-and-monitoring.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/18/esxi-is-free-again.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/18/esxi-is-free-again.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/04/18/esxi-is-free-again.aspx</a></td>
+            </tr>
+            <tr data-domain='www.stratodesk.com'>
+                <td><a href='https://www.stratodesk.com' target='_blank'>www.stratodesk.com</a></td>
+                <td><a href='https://www.stratodesk.com/thin-client-showdown-a-beauty-and-a-beast/' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://www.stratodesk.com/thin-client-showdown-a-beauty-and-a-beast/' target='_blank'>https://www.stratodesk.com/thin-client-showdown-a-beauty-and-a-beast/</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/09/resurrecting-windows-10-systems-with-chromeos-flex.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/09/resurrecting-windows-10-systems-with-chromeos-flex.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/04/09/resurrecting-windows-10-systems-with-chromeos-flex.aspx</a></td>
+            </tr>
+            <tr data-domain='virtualizationreview.com'>
+                <td><a href='https://virtualizationreview.com' target='_blank'>virtualizationreview.com</a></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/14/upgrading-a-windows-10-laptop-to-chromeos-flex.aspx' target='_blank'></a></td>
+                <td></td>
+                <td><a href='https://virtualizationreview.com/articles/2025/04/14/upgrading-a-windows-10-laptop-to-chromeos-flex.aspx' target='_blank'>https://virtualizationreview.com/articles/2025/04/14/upgrading-a-windows-10-laptop-to-chromeos-flex.aspx</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function filterDomain() {
+            const filter = document.getElementById("domainFilter").value;
+            const rows = document.querySelectorAll("#articlesTable tbody tr");
+
+            rows.forEach(row => {
+                const domain = row.getAttribute("data-domain");
+                row.style.display = (filter === "all" || domain === filter) ? "" : "none";
+            });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+        }
+
+        function sortTable(n) {
+            const table = document.getElementById("articlesTable");
+            let switching = true, shouldSwitch, dir = "asc", switchcount = 0;
+            while (switching) {
+                switching = false;
+                let rows = table.rows;
+                for (let i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    let x = rows[i].getElementsByTagName("TD")[n];
+                    let y = rows[i + 1].getElementsByTagName("TD")[n];
+                    const xText = x.textContent || x.innerText;
+                    const yText = y.textContent || y.innerText;
+                    const cmp = (n === 2) ?
+                        new Date(xText) - new Date(yText) :
+                        xText.localeCompare(yText);
+                    if ((dir === "asc" && cmp > 0) || (dir === "desc" && cmp < 0)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
